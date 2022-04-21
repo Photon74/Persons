@@ -55,7 +55,9 @@ namespace Persons.Services.Interfaces
             try
             {
                 var person = _repository.GetItem(id);
-                return new PersonDto
+                return person == null
+                    ? null
+                    : new PersonDto
                 {
                     Age = person.Age,
                     Company = person.Company,
@@ -127,9 +129,9 @@ namespace Persons.Services.Interfaces
         {
             try
             {
-                _repository.UpdateItem(new Person
+                _repository.UpdateItem(item.Id, new Person
                 {
-                    Id = item.Id,
+                    //Id = item.Id,
                     Age = item.Age,
                     Company = item.Company,
                     Email = item.Email,

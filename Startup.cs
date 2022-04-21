@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 
+using Persons.DAL;
 using Persons.DAL.Repositories;
 using Persons.DAL.Repositories.Intrefaces;
 using Persons.Services.Interfaces;
@@ -24,6 +25,8 @@ namespace Persons
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<PersonDbContext>();
+
             services.AddTransient<IPersonRepository, PersonRepository>();
             services.AddTransient<IPersonService, PersonService>();
 
