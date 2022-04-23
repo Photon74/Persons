@@ -2,6 +2,7 @@ using AutoMapper;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -27,6 +28,9 @@ namespace Persons
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var connection = Configuration["ConnectionStrings:PostgresSQL"];
+            services.AddDbContext<PersonDbContext>(options => options.UseNpgsql(connection));
+
             // регистрация маппера
             var mapperConfiguration = new MapperConfiguration(mp
                 => mp.AddProfile(new MapperProfiler()));
@@ -34,7 +38,7 @@ namespace Persons
             services.AddSingleton(mapper);
 
             // регистрация контекста
-            services.AddSingleton<PersonDbContext>();
+            //services.AddSingleton<PersonDbContext>();
 
             // регистрация интерфейсов
             services.AddTransient<IPersonRepository, PersonRepository>();
