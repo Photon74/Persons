@@ -50,7 +50,8 @@ namespace Persons.DAL.Repositories
             try
             {
                 return _context.Persons
-                    .Where(p => p.FirstName == searchQuery)
+                    .Where(p => p.FirstName == searchQuery && p.IsDeleted != true)
+                    .OrderBy(p => p.Id)
                     .ToList();
             }
             catch (Exception)
@@ -81,6 +82,7 @@ namespace Persons.DAL.Repositories
                     .Where(p => p.IsDeleted == false)
                     .Skip(skip)
                     .Take(take)
+                    .OrderBy(p => p.Id)
                     .ToList();
             }
             catch (Exception)

@@ -1,3 +1,4 @@
+using AutoMapper;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,6 +10,7 @@ using Microsoft.OpenApi.Models;
 using Persons.DAL;
 using Persons.DAL.Repositories;
 using Persons.DAL.Repositories.Intrefaces;
+using Persons.Mapper;
 using Persons.Services.Interfaces;
 
 namespace Persons
@@ -25,12 +27,23 @@ namespace Persons
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // регистрация маппера
+            var mapperConfiguration = new MapperConfiguration(mp
+                => mp.AddProfile(new MapperProfiler()));
+            var mapper = mapperConfiguration.CreateMapper();
+            services.AddSingleton(mapper);
+
+            // регистрация контекста
             services.AddSingleton<PersonDbContext>();
 
+            // регистрация интерфейсов
             services.AddTransient<IPersonRepository, PersonRepository>();
             services.AddTransient<IPersonService, PersonService>();
 
+            // регистрация контроллеров
             services.AddControllers();
+
+            // регистрация сваггера
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Persons", Version = "v1" });
