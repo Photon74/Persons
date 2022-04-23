@@ -28,6 +28,8 @@ namespace Persons
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // регистрация контекста
+            //services.AddSingleton<PersonDbContext>();
             var connection = Configuration["ConnectionStrings:PostgresSQL"];
             services.AddDbContext<PersonDbContext>(options => options.UseNpgsql(connection));
 
@@ -37,8 +39,6 @@ namespace Persons
             var mapper = mapperConfiguration.CreateMapper();
             services.AddSingleton(mapper);
 
-            // регистрация контекста
-            //services.AddSingleton<PersonDbContext>();
 
             // регистрация интерфейсов
             services.AddTransient<IPersonRepository, PersonRepository>();
