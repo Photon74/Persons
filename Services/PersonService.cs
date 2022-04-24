@@ -3,11 +3,12 @@
 using Persons.Controllers.DTO;
 using Persons.DAL.Entities;
 using Persons.DAL.Repositories.Intrefaces;
+using Persons.Services.Interfaces;
 
 using System;
 using System.Collections.Generic;
 
-namespace Persons.Services.Interfaces
+namespace Persons.Services
 {
     public class PersonService : IPersonService
     {
