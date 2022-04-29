@@ -1,7 +1,10 @@
-﻿namespace Persons.Services.Interfaces
+﻿using Persons.DAL.Entities;
+
+namespace Persons.Services.Interfaces
 {
     public interface IUserService
     {
-        string Authenticate (string username, string password);
+        TokenResponse Authenticate (string username, string password);
+        string RefreshToken(string token);
     }
 }
