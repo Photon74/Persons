@@ -24,7 +24,7 @@ namespace Persons.Controllers
         [HttpPost("authenticate")]
         public IActionResult Authenticate([FromQuery] string user, string password)
         {
-            TokenResponse token = _userService.Authenticate(user, password);
+            var token = _userService.Authenticate(user, password);
             if (token is null)
             {
                 return BadRequest(new
@@ -40,8 +40,8 @@ namespace Persons.Controllers
         [HttpPost("refresh-token")]
         public IActionResult Refresh()
         {
-            string oldRefreshToken = Request.Cookies["refreshToken"];
-            string newRefreshToken = _userService.RefreshToken(oldRefreshToken);
+            var oldRefreshToken = Request.Cookies["refreshToken"];
+            var newRefreshToken = _userService.RefreshToken(oldRefreshToken);
 
             if (string.IsNullOrEmpty(newRefreshToken))
             {
@@ -57,7 +57,7 @@ namespace Persons.Controllers
             var cookieOptions = new CookieOptions
             {
                 HttpOnly = true,
-                Expires = DateTime.UtcNow.AddDays(7),
+                Expires = DateTime.UtcNow.AddDays(7)
             };
             Response.Cookies.Append("refreshToken", token, cookieOptions);
         }

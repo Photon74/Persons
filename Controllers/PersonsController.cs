@@ -21,7 +21,7 @@ namespace Persons.Controllers
         /// <summary>
         /// Получение человека по идентификатору
         /// </summary>
-        /// <param name="personId"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
         public IActionResult GetPersonById([FromRoute] int id)

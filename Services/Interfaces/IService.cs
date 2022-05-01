@@ -10,6 +10,5 @@ namespace Persons.Services.Interfaces
         bool AddItem(T item);
         bool UpdateItem(T item);
         bool DeleteItem(int id);
-
     }
 }

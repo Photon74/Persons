@@ -12,7 +12,7 @@ using Microsoft.OpenApi.Models;
 
 using Persons.DAL;
 using Persons.DAL.Repositories;
-using Persons.DAL.Repositories.Intrefaces;
+using Persons.DAL.Repositories.Interfaces;
 using Persons.Mapper;
 using Persons.Services;
 using Persons.Services.Interfaces;
@@ -36,29 +36,29 @@ namespace Persons
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // регистрация контекста
+            // СЂРµРіРёСЃС‚СЂР°С†РёСЏ РєРѕРЅС‚РµРєСЃС‚Р°
             //services.AddSingleton<PersonDbContext>();
             var connection = Configuration["ConnectionStrings:PostgresSQL"];
             services.AddDbContext<PersonDbContext>(options => options.UseNpgsql(connection));
 
-            // регистрация маппера
+            // СЂРµРіРёСЃС‚СЂР°С†РёСЏ РјР°РїРїРµСЂР°
             var mapperConfiguration = new MapperConfiguration(mp
                 => mp.AddProfile(new MapperProfiler()));
             var mapper = mapperConfiguration.CreateMapper();
             services.AddSingleton(mapper);
 
-            // регистрация интерфейсов
+            // СЂРµРіРёСЃС‚СЂР°С†РёСЏ РёРЅС‚РµСЂС„РµР№СЃРѕРІ
             services.AddTransient<IPersonRepository, PersonRepository>();
             services.AddTransient<IPersonService, PersonService>();
             services.AddTransient<IUserService, UserService>();
 
-            // разрешаем делать межсайтовые запросы
+            // СЂР°Р·СЂРµС€Р°РµРј РґРµР»Р°С‚СЊ РјРµР¶СЃР°Р№С‚РѕРІС‹Рµ Р·Р°РїСЂРѕСЃС‹
             services.AddCors();
 
-            // регистрация контроллеров
+            // СЂРµРіРёСЃС‚СЂР°С†РёСЏ РєРѕРЅС‚СЂРѕР»Р»РµСЂРѕРІ
             services.AddControllers();
 
-            // регистрация и настройка аутентификации
+            // СЂРµРіРёСЃС‚СЂР°С†РёСЏ Рё РЅР°СЃС‚СЂРѕР№РєР° Р°СѓС‚РµРЅС‚РёС„РёРєР°С†РёРё
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -78,13 +78,13 @@ namespace Persons
                     };
                 });
 
-            // регистрация и настройка сваггера
+            // СЂРµРіРёСЃС‚СЂР°С†РёСЏ Рё РЅР°СЃС‚СЂРѕР№РєР° СЃРІР°РіРіРµСЂР°
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v2", new OpenApiInfo { Title = "Persons", Version = "v2" });
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
-                    Description = "Заголовок авторизации JWT с использованием схемы Bearer (Например: 'Bearer 12345abcdef')",
+                    Description = "Р—Р°РіРѕР»РѕРІРѕРє Р°РІС‚РѕСЂРёР·Р°С†РёРё JWT СЃ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµРј СЃС…РµРјС‹ Bearer (РќР°РїСЂРёРјРµСЂ: 'Bearer 12345abcdef')",
                     Name = "Authorization",
                     In = ParameterLocation.Header,
                     Type = SecuritySchemeType.ApiKey,

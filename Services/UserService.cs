@@ -27,7 +27,7 @@ namespace Persons.Services
             }
 
             var tokenResponse = new TokenResponse();
-            int i = 0;
+            var i = 0;
 
             foreach (var pair in _users)
             {
@@ -35,7 +35,7 @@ namespace Persons.Services
                 if (string.CompareOrdinal(pair.Key, username) == 0 && string.CompareOrdinal(pair.Value.Password, password) == 0)
                 {
                     tokenResponse.Token = GenerateJwtToken(i, 15);
-                    RefreshToken refreshToken = GenerateRefreshToken(i);
+                    var refreshToken = GenerateRefreshToken(i);
                     pair.Value.LatestRefreshToken = refreshToken;
                     tokenResponse.RefreshToken = refreshToken.Token;
                     return tokenResponse;
@@ -46,7 +46,7 @@ namespace Persons.Services
 
         public string RefreshToken(string token)
         {
-            int i = 0;
+            var i = 0;
 
             foreach(var pair in _users)
             {

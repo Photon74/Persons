@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Persons.DAL.Repositories.Intrefaces
+namespace Persons.DAL.Repositories.Interfaces
 {
     public interface IRepository<T>
     {
