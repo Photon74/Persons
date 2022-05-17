@@ -1,4 +1,6 @@
-﻿using Persons.Controllers.DTO;
+﻿using AutoMapper;
+
+using Persons.Controllers.DTO;
 using Persons.DAL.Entities;
 using Persons.DAL.Repositories.Intrefaces;
 
@@ -10,25 +12,19 @@ namespace Persons.Services.Interfaces
     public class PersonService : IPersonService
     {
         private readonly IPersonRepository _repository;
+        private readonly IMapper _mapper;
 
-        public PersonService(IPersonRepository repository)
+        public PersonService(IPersonRepository repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
         public bool AddItem(PersonDto item)
         {
             try
             {
-                _repository.AddItem(new Person
-                {
-                    Age = item.Age,
-                    Company = item.Company,
-                    Email = item.Email,
-                    FirstName = item.FirstName,
-                    LastName = item.LastName,
-                    Id = item.Id,
-                });
+                _repository.AddItem(_mapper.Map<Person>(item));
                 return true;
             }
             catch (Exception)
@@ -55,15 +51,9 @@ namespace Persons.Services.Interfaces
             try
             {
                 var person = _repository.GetItem(id);
-                return new PersonDto
-                {
-                    Age = person.Age,
-                    Company = person.Company,
-                    Email = person.Email,
-                    FirstName = person.FirstName,
-                    LastName = person.LastName,
-                    Id = person.Id,
-                };
+                return person == null
+                    ? null
+                    : _mapper.Map<PersonDto>(person);
             }
             catch (Exception)
             {
@@ -79,15 +69,7 @@ namespace Persons.Services.Interfaces
                 List<PersonDto> result = new();
                 foreach (var person in persons)
                 {
-                    result.Add(new PersonDto
-                    {
-                        Age = person.Age,
-                        Company = person.Company,
-                        Email = person.Email,
-                        FirstName = person.FirstName,
-                        LastName = person.LastName,
-                        Id = person.Id,
-                    });
+                    result.Add(_mapper.Map<PersonDto>(person));
                 }
                 return result;
             }
@@ -105,15 +87,7 @@ namespace Persons.Services.Interfaces
                 List<PersonDto> result = new();
                 foreach (var person in persons)
                 {
-                    result.Add(new PersonDto
-                    {
-                        Age = person.Age,
-                        Company = person.Company,
-                        Email = person.Email,
-                        FirstName = person.FirstName,
-                        LastName = person.LastName,
-                        Id = person.Id,
-                    });
+                    result.Add(_mapper.Map<PersonDto>(person));
                 }
                 return result;
             }
@@ -127,15 +101,7 @@ namespace Persons.Services.Interfaces
         {
             try
             {
-                _repository.UpdateItem(new Person
-                {
-                    Id = item.Id,
-                    Age = item.Age,
-                    Company = item.Company,
-                    Email = item.Email,
-                    FirstName = item.FirstName,
-                    LastName = item.LastName,
-                });
+                _repository.UpdateItem(item.Id, _mapper.Map<Person>(item));
                 return true;
             }
             catch (Exception)

@@ -8,7 +8,7 @@ namespace Persons.DAL.Repositories.Intrefaces
         IReadOnlyList<T> GetItemsList(int skip, int take);
         IReadOnlyList<T> FindItems(string searchQuery);
         bool AddItem(T item);
-        bool UpdateItem(T item);
+        bool UpdateItem(int id, T item);
         bool DeleteItem(int id);
     }
 }
