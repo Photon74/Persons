@@ -1,5 +1,5 @@
 ﻿using Persons.DAL.Entities;
-using Persons.DAL.Repositories.Intrefaces;
+using Persons.DAL.Repositories.Interfaces;
 
 using System;
 using System.Collections.Generic;
@@ -33,10 +33,11 @@ namespace Persons.DAL.Repositories
         {
             try
             {
-                _context.Persons
-                    .Where(p => p.Id == id)
-                    .SingleOrDefault()
-                    .IsDeleted = true;
+                var person = _context.Persons.SingleOrDefault(p => p.Id == id);
+                if (person is not null)
+                {
+                    person.IsDeleted = true;
+                }
             }
             catch (Exception)
             {
@@ -95,7 +96,7 @@ namespace Persons.DAL.Repositories
         {
             try
             {
-                Person person = _context.Persons.Where(p => p.Id == id).FirstOrDefault();
+                var person = _context.Persons.FirstOrDefault(p => p.Id == id);
                 if (person != null)
                 {
                     person.FirstName = item.FirstName;
@@ -115,7 +116,7 @@ namespace Persons.DAL.Repositories
 
         private bool Commit()
         {
-            int count = _context.SaveChanges();
+            var count = _context.SaveChanges();
             return count > 0;
         }
     }

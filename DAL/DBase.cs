@@ -6,7 +6,7 @@ namespace Persons.DAL
 {
     public class DBase
     {
-        public List<Person> data = new()
+        public List<Person> data = new List<Person>
         {
             new Person { Id = 1, FirstName = "Veda", LastName = "Richmond", Email = "ligula@necluctus.edu", Company = "Quisque Ac Libero LLP", Age = 42 },
             new Person { Id = 2, FirstName = "Demetria", LastName = "Andrews", Email = "feugiat.metus@penatibuset.org", Company = "Nulla Facilisi Foundation", Age = 31 },

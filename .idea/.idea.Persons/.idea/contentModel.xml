@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\Photo\AppData\Local\JetBrains\Rider2020.2\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Photo\AppData\Local\JetBrains\Rider2020.2\resharper-host\Local\Transient\Rider\v202\SolutionCaches\_Persons.800274480.00" t="ExcludeRecursive" />
+    <e p="C:\Users\Photo\source\repos\Photon74\Persons" t="IncludeRecursive">
+      <e p=".gitignore" t="Include" />
+      <e p="appsettings.Development.json" t="Include" />
+      <e p="appsettings.json" t="Include" />
+      <e p="bin" t="ExcludeRecursive" />
+      <e p="Controllers" t="Include">
+        <e p="DTO" t="Include">
+          <e p="PersonDto.cs" t="Include" />
+        </e>
+        <e p="PersonsController.cs" t="Include" />
+        <e p="UsersController.cs" t="Include" />
+      </e>
+      <e p="DAL" t="Include">
+        <e p="DBase.cs" t="Include" />
+        <e p="Entities" t="Include">
+          <e p="AuthResponse.cs" t="Include" />
+          <e p="Person.cs" t="Include" />
+          <e p="RefreshToken.cs" t="Include" />
+          <e p="TokenResponse.cs" t="Include" />
+        </e>
+        <e p="PersonDbContext.cs" t="Include" />
+        <e p="Repositories" t="Include">
+          <e p="Interfaces" t="Include">
+            <e p="IPersonRepository.cs" t="Include" />
+            <e p="IRepository.cs" t="Include" />
+          </e>
+          <e p="PersonRepository.cs" t="Include" />
+        </e>
+      </e>
+      <e p="Mapper" t="Include">
+        <e p="MapperProfiler.cs" t="Include" />
+      </e>
+      <e p="Migrations" t="Include">
+        <e p="20220421104545_Initial.cs" t="Include" />
+        <e p="20220421104545_Initial.Designer.cs" t="Include" />
+        <e p="PersonDbContextModelSnapshot.cs" t="Include" />
+      </e>
+      <e p="obj" t="ExcludeRecursive">
+        <e p="Debug" t="Include">
+          <e p="net5.0" t="Include">
+            <e p="Persons.AssemblyInfo.cs" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="Persons.csproj" t="IncludeRecursive" />
+      <e p="Persons.sln" t="IncludeFlat" />
+      <e p="Program.cs" t="Include" />
+      <e p="Properties" t="Include">
+        <e p="launchSettings.json" t="Include" />
+      </e>
+      <e p="Services" t="Include">
+        <e p="Interfaces" t="Include">
+          <e p="IPersonService.cs" t="Include" />
+          <e p="IService.cs" t="Include" />
+          <e p="IUserService.cs" t="Include" />
+        </e>
+        <e p="PersonService.cs" t="Include" />
+        <e p="UserService.cs" t="Include" />
+      </e>
+      <e p="Startup.cs" t="Include" />
+      <e p="Validation" t="Include" />
+    </e>
+  </component>
+</project>

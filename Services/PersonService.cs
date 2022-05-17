@@ -2,12 +2,14 @@
 
 using Persons.Controllers.DTO;
 using Persons.DAL.Entities;
-using Persons.DAL.Repositories.Intrefaces;
+using Persons.DAL.Repositories.Interfaces;
+using Persons.Services.Interfaces;
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
-namespace Persons.Services.Interfaces
+namespace Persons.Services
 {
     public class PersonService : IPersonService
     {
@@ -66,12 +68,7 @@ namespace Persons.Services.Interfaces
             try
             {
                 var persons = _repository.FindItems(name);
-                List<PersonDto> result = new();
-                foreach (var person in persons)
-                {
-                    result.Add(_mapper.Map<PersonDto>(person));
-                }
-                return result;
+                return persons.Select(person => _mapper.Map<PersonDto>(person)).ToList();
             }
             catch (Exception)
             {
@@ -84,12 +81,7 @@ namespace Persons.Services.Interfaces
             try
             {
                 var persons = _repository.GetItemsList(skip, take);
-                List<PersonDto> result = new();
-                foreach (var person in persons)
-                {
-                    result.Add(_mapper.Map<PersonDto>(person));
-                }
-                return result;
+                return persons.Select(person => _mapper.Map<PersonDto>(person)).ToList();
             }
             catch (Exception)
             {
